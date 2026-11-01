@@ -110,20 +110,54 @@ new MutationObserver(themeChanged).observe(root, { attributes: true, attributeFi
 PVN.setFocus = function(f, src){ PVN.focus = f; PVN.emit('focus', { focus: f, src: src || '' }); };
 
 /* ---------- data ---------- */
+/* Hardware first: these groups and projects follow the electronics resume. */
 PVN.GROUPS = [
-  { id: 'lang',  des: 'J1', name: 'Languages' },
-  { id: 'web',   des: 'J2', name: 'Web & apps' },
-  { id: 'ai',    des: 'J3', name: 'AI / ML' },
-  { id: 'data',  des: 'J4', name: 'Data & cloud' },
-  { id: 'sys',   des: 'J5', name: 'Systems & IoT' },
-  { id: 'tools', des: 'J6', name: 'Fundamentals' }
+  { id: 'rtl',  des: 'J1', name: 'RTL & verification' },
+  { id: 'vlsi', des: 'J2', name: 'Digital & VLSI' },
+  { id: 'hw',   des: 'J3', name: 'Boards & IoT' },
+  { id: 'eda',  des: 'J4', name: 'EDA & tools' },
+  { id: 'sys',  des: 'J5', name: 'Systems' },
+  { id: 'lang', des: 'J6', name: 'Languages' },
+  { id: 'web',  des: 'J7', name: 'Web, data & cloud' },
+  { id: 'ai',   des: 'J8', name: 'AI / ML' }
 ];
 function N(name, short, group, alias, also){ return { name: name, short: short, group: group, alias: alias || [], also: also || '' }; }
-var TK = 'Also used day to day at Thinkads.co.';
+var TK = 'Also used day to day at Thinkads.co.', MG = 'Malgudi Technolabs';
 PVN.NETS = {
+  sv:        N('SystemVerilog', 'SV', 'rtl', ['systemverilog']),
+  verilog:   N('Verilog', 'VLOG', 'rtl', []),
+  uvm:       N('UVM', 'UVM', 'rtl', []),
+  crv:       N('Constrained-random stimulus', 'CRV', 'rtl', ['constrainedrandom', 'random']),
+  sva:       N('SystemVerilog Assertions', 'SVA', 'rtl', ['assertions']),
+  cov:       N('Code & functional coverage', 'COV', 'rtl', ['coverage', 'functionalcoverage']),
+  amba:      N('AMBA: AXI, AHB, APB', 'AXI', 'vlsi', ['axi', 'ahb', 'apb']),
+  cdc:       N('CDC & metastability', 'CDC', 'vlsi', ['metastability', 'clockdomaincrossing']),
+  sta:       N('Static timing analysis', 'STA', 'vlsi', ['timing', 'statictiminganalysis']),
+  asic:      N('ASIC design flow', 'ASIC', 'vlsi', ['asicflow']),
+  dft:       N('Design for test', 'DFT', 'vlsi', ['designfortest', 'scan']),
+  pd:        N('Physical design', 'PD', 'vlsi', ['physicaldesign', 'layout']),
+  fpga:      N('Basys-3 (Artix-7 FPGA)', 'FPGA', 'hw', ['basys3', 'artix7', 'basys', 'artix']),
+  stm32:     N('STM32 Blue Pill', 'STM', 'hw', ['stm', 'bluepill']),
+  esp32:     N('ESP32', 'ESP', 'hw', ['esp']),
+  arduino:   N('Arduino', 'ARD', 'hw', []),
+  rpi:       N('Raspberry Pi', 'RPI', 'hw', ['raspberrypi', 'pi'], 'Raspberry Pi projects at ' + MG + '.'),
+  gps:       N('GPS / GSM', 'GPS', 'hw', ['gsm', 'gpsgsm']),
+  rfid:      N('RFID', 'RFID', 'hw', []),
+  vivado:    N('Xilinx Vivado', 'VIV', 'eda', ['xilinx']),
+  xsim:      N('Vivado Simulator (XSIM)', 'XSIM', 'eda', ['simulator', 'vivadosimulator']),
+  wave:      N('Waveform debugging', 'WAVE', 'eda', ['waveform', 'waveforms']),
+  cad:       N('CAD', 'CAD', 'eda', []),
+  git:       N('Git & GitHub', 'GIT', 'eda', ['github']),
+  arch:      N('Computer architecture', 'ARCH', 'sys', ['architecture']),
+  rtos:      N('Linux & RTOS', 'RTOS', 'sys', ['linux', 'os', 'operatingsystems', 'freertos'], 'Linux on Raspberry Pi and AI-agent prototypes at ' + MG + '.'),
+  dma:       N('DMA', 'DMA', 'sys', ['directmemoryaccess']),
+  networks:  N('Computer networks', 'NET', 'sys', ['networking', 'computernetworks', 'mesh'], 'Network configuration and mesh networking at ' + MG + '.'),
+  dsa:       N('Data structures & algorithms', 'DSA', 'sys', ['algorithms', 'datastructures', 'leetcode'], 'Coursework and LeetCode practice.'),
   c:         N('C', 'C', 'lang', [], 'Programming in C certificate, Infosys Springboard.'),
   cpp:       N('C++', 'C++', 'lang', ['cplusplus']),
+  emc:       N('Embedded C', 'EMBC', 'lang', ['embeddedc', 'embedded']),
   python:    N('Python', 'PY', 'lang', ['py']),
+  matlab:    N('MATLAB', 'MAT', 'lang', []),
   js:        N('JavaScript', 'JS', 'lang', ['javascript'], TK),
   ts:        N('TypeScript', 'TS', 'lang', ['typescript']),
   sql:       N('SQL', 'SQL', 'lang', [], TK),
@@ -132,34 +166,59 @@ PVN.NETS = {
   rn:        N('React Native', 'RN', 'web', ['reactnative']),
   node:      N('Node.js', 'NODE', 'web', ['nodejs'], 'Also part of the MERN stack at Thinkads.co.'),
   fastapi:   N('FastAPI', 'FAPI', 'web', []),
-  tailwind:  N('Tailwind CSS', 'TW', 'web', ['tailwindcss']),
+  postgres:  N('Supabase + PostgreSQL', 'PG', 'web', ['postgresql', 'pg', 'supabase']),
+  sqlite:    N('SQLite', 'SQLT', 'web', []),
+  aws:       N('AWS Lambda + DynamoDB', 'AWS', 'web', ['lambda', 'dynamodb', 'awslambda']),
+  ws:        N('WebSockets', 'WS', 'web', ['websocket', 'websockets']),
+  rest:      N('REST APIs', 'REST', 'web', ['restapi', 'restapis', 'api'], 'Also integrated across client projects at Thinkads.co.'),
   llm:       N('LLMs (Llama, Ollama)', 'LLM', 'ai', ['llms', 'llama', 'ollama']),
   bedrock:   N('Amazon Bedrock', 'BDRK', 'ai', ['amazonbedrock']),
   rag:       N('RAG pipelines', 'RAG', 'ai', ['retrieval']),
   mediapipe: N('MediaPipe Pose', 'POSE', 'ai', ['pose', 'mediapipepose']),
   whisper:   N('Whisper STT', 'STT', 'ai', ['stt', 'whisperstt']),
-  fastpitch: N('FastPitch TTS', 'TTS', 'ai', ['tts', 'hifigan']),
-  postgres:  N('PostgreSQL', 'PG', 'data', ['postgresql', 'pg']),
-  supabase:  N('Supabase', 'SUPA', 'data', []),
-  firebase:  N('Firebase', 'FIRE', 'data', []),
-  sqlite:    N('SQLite', 'SQLT', 'data', []),
-  aws:       N('AWS Lambda + DynamoDB', 'AWS', 'data', ['lambda', 'dynamodb', 'awslambda']),
-  netlify:   N('Netlify', 'NTLY', 'data', []),
-  esp32:     N('ESP32', 'ESP', 'sys', ['esp']),
-  gps:       N('GPS / GSM', 'GPS', 'sys', ['gsm', 'gpsgsm']),
-  rfid:      N('RFID', 'RFID', 'sys', []),
-  embedded:  N('Embedded systems', 'EMB', 'sys', ['embeddedsystems', 'firmware']),
-  ws:        N('WebSockets', 'WS', 'sys', ['websocket', 'websockets']),
-  rest:      N('REST APIs', 'REST', 'sys', ['restapi', 'restapis', 'api'], 'Also integrated across client projects at Thinkads.co.'),
-  git:       N('Git', 'GIT', 'tools', ['github']),
-  linux:     N('Linux / CLI', 'LNX', 'tools', ['cli', 'linuxcli', 'raspberrypi'], 'Raspberry Pi and AI-agent work on Linux at Malgudi Technolabs.'),
-  dsa:       N('Data structures & algorithms', 'DSA', 'tools', ['algorithms', 'datastructures', 'leetcode'], 'Coursework and LeetCode practice.'),
-  networks:  N('Computer networks', 'NET', 'tools', ['networking', 'computernetworks'], 'Network configuration and mesh networking at Malgudi Technolabs.')
+  fastpitch: N('FastPitch TTS', 'TTS', 'ai', ['tts', 'hifigan'])
 };
 
-var GH = 'https://github.com/Sin-Kid';
+var GH = 'https://github.com/Sin-Kid/';
+PVN.LINKS = {
+  mail: 'pavang1052005@gmail.com',
+  github: 'https://github.com/Sin-Kid',
+  linkedin: 'https://www.linkedin.com/in/pavan-g-062a59292',
+  leetcode: 'https://leetcode.com/u/0ZYfHENg4s/'
+};
 PVN.PROJECTS = [
-  { id: 'firefit', des: 'U2', name: 'Fire-Fit', tag: 'Amazon hackathon',
+  { id: 'parking', des: 'U2', name: 'Smart Parking', tag: 'FPGA · RTL',
+    sum: 'A real-time parking controller written in SystemVerilog and running on a Basys-3 FPGA, with automatic slot allocation and an emergency override.',
+    body: [
+      'SystemVerilog RTL on a Basys-3 (Artix-7) board: automated slot allocation, occupancy tracking and FSM-driven emergency priority logic.',
+      'Verified with SystemVerilog Assertions and a coverage-driven testbench, reaching 100% functional coverage in the Vivado simulator (XSIM).',
+      'Validated end to end on the physical board, driving LEDs and seven-segment displays for live occupancy feedback.'
+    ],
+    meas: [['Functional coverage', '100', '%'], ['Board', 'Basys-3', 'Artix-7'], ['Checks', 'SVA', '+ coverage'], ['Feedback', '7-seg', '+ LEDs']],
+    nets: ['sv', 'sva', 'cov', 'fpga', 'vivado', 'xsim'],
+    links: [],
+    preview: { src: '/img/smart-parking.svg', kind: 'Illustration', alt: 'Illustration of the Smart Parking design: a seven-segment display showing five free slots, occupancy LEDs, an emergency switch and the path from inputs through slot allocation and the priority FSM to the outputs.' } },
+  { id: 'smartbus', des: 'U3', name: 'Smart Bus', tag: 'IoT · real time',
+    sum: 'Real-time fleet and passenger management, from ESP32 hardware on the bus to live dashboards.',
+    body: [
+      'ESP32 units send GPS and RFID telemetry into Supabase and PostgreSQL every 2 seconds. React and React Native front ends sit on top, and device behavior was validated against emulated devices.',
+      'RFID tap-ins are protected against duplicate transactions, and occupancy is tracked live, keeping a digital twin of each bus’s position and passengers.'
+    ],
+    meas: [['Telemetry interval', '2', 's'], ['Duplicate taps', 'blocked', ''], ['Digital twin', 'live', 'bus + riders']],
+    nets: ['esp32', 'gps', 'rfid', 'postgres', 'sql', 'react', 'rn', 'js'],
+    links: [['Code', GH + 'smart-bus-app'], ['Demo video', 'https://drive.google.com/drive/folders/1-6QwSIBd1sO_FEfgYHaz-M9BqnWz_YpU']],
+    preview: { src: '/img/smart-bus.svg', kind: 'Architecture', alt: 'Architecture sketch of Smart Bus: an ESP32 with GPS and RFID on the bus sends telemetry every 2 seconds to Supabase and PostgreSQL, which feed a React fleet dashboard and a React Native passenger app.' } },
+  { id: 'telebot', des: 'U4', name: 'TeleBot AI', tag: 'Voice · LLM',
+    sum: 'A voice assistant that resolves internet-provider complaints in English, Hindi, Kannada and Telugu.',
+    body: [
+      'Speech comes in through Whisper, Llama 3.2 answers locally through Ollama, and Indic FastPitch with HiFi-GAN speaks the reply. A FastAPI backend ties the pipeline together.',
+      'Every answer is grounded in live SQLite subscriber, billing and balance data, so the model only states what it can look up for that customer.'
+    ],
+    meas: [['Languages', '4', 'EN HI KN TE'], ['Model', 'Llama 3.2', 'local'], ['Grounding', 'live', 'SQLite']],
+    nets: ['python', 'fastapi', 'llm', 'whisper', 'fastpitch', 'rag', 'sqlite', 'sql'],
+    links: [['Code', GH + 'telecom-ai-bot']],
+    preview: { src: '/img/telebot.svg', kind: 'Pipeline', alt: 'Pipeline sketch of TeleBot AI: caller speech goes through Whisper, then Llama 3.2 running locally with SQLite customer data, then FastPitch and HiFi-GAN speak the reply.' } },
+  { id: 'firefit', des: 'U5', name: 'Fire-Fit', tag: 'Amazon hackathon',
     sum: 'An AI personal trainer for Fire TV. Your phone becomes the TV’s camera and microphone, and a pose model counts your reps.',
     body: [
       'A React Native TV app for Vega OS, built solo for the Amazon Developer Hackathon. Amazon Bedrock generates each workout through tool calling against a JSON schema, served by a Node.js backend on AWS Lambda with DynamoDB.',
@@ -167,33 +226,26 @@ PVN.PROJECTS = [
       'The rep counter covers 19 exercise families using 3D joint angles, a One Euro filter and hysteresis state machines.'
     ],
     meas: [['±1-rep accuracy', '78→92', '%'], ['False reps', '0', ''], ['Exercise families', '19', ''], ['Benchmark', '246', 'sequences']],
-    nets: ['rn', 'js', 'node', 'bedrock', 'llm', 'aws', 'mediapipe'] },
-  { id: 'telebot', des: 'U3', name: 'TeleBot AI', tag: 'Voice · LLM',
-    sum: 'A voice assistant that resolves internet-provider complaints in English, Hindi, Kannada and Telugu.',
-    body: [
-      'Speech comes in through Whisper, Llama 3.2 answers locally through Ollama, and Indic FastPitch with HiFi-GAN speaks the reply. A FastAPI backend ties the pipeline together.',
-      'Every answer is grounded in live SQLite subscriber, billing and balance data, so the model only states what it can look up for that customer.'
-    ],
-    meas: [['Languages', '4', 'EN HI KN TE'], ['Model', 'Llama 3.2', 'local'], ['Grounding', 'live', 'SQLite']],
-    nets: ['python', 'fastapi', 'llm', 'whisper', 'fastpitch', 'rag', 'sqlite', 'sql'] },
-  { id: 'smartbus', des: 'U4', name: 'Smart Bus', tag: 'IoT · real time',
-    sum: 'Real-time fleet and passenger management, from ESP32 hardware on the bus to live dashboards.',
-    body: [
-      'ESP32 units send GPS and RFID telemetry into Supabase and PostgreSQL every 2 seconds. React and React Native front ends sit on top, and device behavior was validated against emulated devices.',
-      'RFID tap-ins are protected against duplicate transactions, and occupancy is tracked live, keeping a digital twin of each bus’s position and passengers.'
-    ],
-    meas: [['Telemetry interval', '2', 's'], ['Duplicate taps', 'blocked', ''], ['Digital twin', 'live', 'bus + riders']],
-    nets: ['esp32', 'gps', 'rfid', 'embedded', 'supabase', 'postgres', 'sql', 'react', 'rn', 'js'] },
-  { id: 'pos', des: 'U5', name: 'Portfolio OS', tag: 'Web desktop',
+    nets: ['rn', 'js', 'node', 'bedrock', 'llm', 'aws', 'mediapipe'],
+    links: [['Code', GH + 'fire-fit-tv'], ['Demo video', 'https://youtu.be/du_oGdhgtNg'], ['Try it in a browser', 'https://fire-fit-tv.netlify.app']],
+    preview: { src: '/img/fire-fit.webp', kind: 'Screenshot', href: 'https://youtu.be/du_oGdhgtNg', alt: 'Fire-Fit on the Vega virtual device: a 10-minute fat-burn workout preview with its move list and a QR code for pairing a phone.' } },
+  { id: 'pos', des: 'U6', name: 'Portfolio OS', tag: 'Web desktop',
     sum: 'A macOS-style desktop that runs in the browser, with live trading apps and Spotify built in.',
     body: [
       'A multi-window desktop in Next.js and TypeScript. Several apps run side by side with decoupled state, and Spotify plays through the official API.',
       'Stock-P streams live stock prices. P-Trade draws real-time Binance candlestick charts with SMA and Bollinger Bands, a demo wallet and timed trades from 15 seconds to 5 minutes.'
     ],
     meas: [['Windows', 'multi', 'concurrent'], ['Indicators', 'SMA · BB', ''], ['Trade timers', '15s–5', 'min']],
-    nets: ['next', 'ts', 'react', 'ws', 'rest'] }
+    nets: ['next', 'ts', 'react', 'ws', 'rest'],
+    links: [['Live demo', 'https://panna-g.netlify.app']],
+    preview: { src: '/img/portfolio-os.webp', kind: 'Screenshot', href: 'https://panna-g.netlify.app', alt: 'Portfolio OS in the browser: a macOS-style desktop with calendar and clock widgets and the P-Trade trading window open.' } }
 ];
-PVN.PROJECTS.forEach(function(p){ p.link = GH; });
+
+PVN.CERTS = [
+  { name: 'Database Management Systems', by: 'IIT Kharagpur · NPTEL', url: 'https://drive.google.com/file/d/1_DYNXCOH5dYN1XJirf1S8IyEOlQyh9iE/view?usp=sharing' },
+  { name: 'Data Science for Engineers', by: 'IIT Madras · NPTEL', url: 'https://drive.google.com/file/d/1yN74YkgKTWbcs18IjesGX3fXZqNzMVS9/view?usp=sharing' },
+  { name: 'Programming in C', by: 'Infosys Springboard', url: 'https://drive.google.com/file/d/1aczmtpKOwls12Zvs68pvx5QIBQ6tPjYH/view?usp=sharing' }
+];
 
 PVN.CHANNELS = [
   { id: 'thinkads', ch: 'D1', name: 'Thinkads.co', role: 'Freelance engineer', start: [2025, 12], end: null, c: '--c1' },

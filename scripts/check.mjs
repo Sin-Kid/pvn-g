@@ -2,7 +2,8 @@
 //  1. every script in site/js parses
 //  2. every local file the HTML points at exists
 //  3. pages load nothing from other origins (fonts are self-hosted)
-//  4. the security headers are still in place
+//  4. every project preview image exists
+//  5. the security headers are still in place
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { join } from 'node:path';
@@ -41,6 +42,13 @@ for (const page of ['index.html', '404.html']) {
   external.forEach((tag) => fail(`${page} loads from another origin: ${tag}`));
   if (!external.length) pass(`${page}: loads nothing from other origins`);
 }
+
+const data = readFileSync(join(SITE, 'js/core.js'), 'utf8');
+let missingImages = 0;
+for (const [, ref] of data.matchAll(/'(\/img\/[^']+)'/g)) {
+  if (!existsSync(join(SITE, ref.slice(1)))) { missingImages++; fail(`core.js points at ${ref}, which does not exist`); }
+}
+if (!missingImages) pass('every project preview image exists');
 
 const headers = readFileSync(join(SITE, '_headers'), 'utf8');
 for (const h of ['Content-Security-Policy', 'X-Content-Type-Options', 'Referrer-Policy']) {

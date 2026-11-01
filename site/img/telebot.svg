@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+  <defs>
+    <pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#10231B" stroke-width="1"/></pattern>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#FFC24D"/></marker>
+  </defs>
+  <rect width="960" height="540" fill="#08130F"/>
+  <rect width="960" height="540" fill="url(#g)"/>
+  <text x="40" y="52" font-size="18" fill="#7FA190" letter-spacing="2">TELEBOT AI · LOCAL VOICE PIPELINE</text>
+
+  <!-- incoming speech waveform -->
+  <g stroke="#4FD38B" stroke-width="4" stroke-linecap="round">
+    <path d="M52 250V270M66 236V284M80 222V298M94 242V278M108 214V306M122 232V288M136 246V274"/>
+  </g>
+  <text x="40" y="340" font-size="13" fill="#7FA190">caller</text>
+  <text x="40" y="360" font-size="13" fill="#4FD38B">EN HI KN TE</text>
+
+  <!-- FastAPI frame -->
+  <rect x="168" y="104" width="620" height="330" rx="16" fill="none" stroke="#2E5A47" stroke-dasharray="6 6"/>
+  <text x="188" y="132" font-size="13" fill="#7FA190" letter-spacing="2">FASTAPI BACKEND</text>
+
+  <rect x="196" y="214" width="150" height="92" rx="10" fill="#0D1D17" stroke="#2E5A47"/>
+  <text x="271" y="250" font-size="17" fill="#E3EAE5" text-anchor="middle">Whisper</text>
+  <text x="271" y="276" font-size="12" fill="#7FA190" text-anchor="middle">speech to text</text>
+
+  <rect x="400" y="200" width="160" height="120" rx="10" fill="#151819" stroke="#FFC24D"/>
+  <text x="480" y="244" font-size="18" fill="#E3EAE5" text-anchor="middle">Llama 3.2</text>
+  <text x="480" y="270" font-size="12" fill="#7FA190" text-anchor="middle">via Ollama</text>
+  <text x="480" y="294" font-size="12" fill="#FFC24D" text-anchor="middle">runs locally</text>
+
+  <rect x="614" y="214" width="150" height="92" rx="10" fill="#0D1D17" stroke="#2E5A47"/>
+  <text x="689" y="248" font-size="15" fill="#E3EAE5" text-anchor="middle">FastPitch</text>
+  <text x="689" y="268" font-size="13" fill="#E3EAE5" text-anchor="middle">+ HiFi-GAN</text>
+  <text x="689" y="290" font-size="12" fill="#7FA190" text-anchor="middle">Indic TTS</text>
+
+  <rect x="400" y="356" width="160" height="60" rx="10" fill="#0A1712" stroke="#4FD38B"/>
+  <text x="480" y="382" font-size="15" fill="#E3EAE5" text-anchor="middle">SQLite</text>
+  <text x="480" y="402" font-size="11" fill="#4FD38B" text-anchor="middle">plans · billing · balance</text>
+
+  <g stroke="#FFC24D" stroke-width="3" fill="none" marker-end="url(#a)">
+    <path d="M144 260H192"/><path d="M346 260H396"/><path d="M560 260H610"/><path d="M764 260H812"/>
+  </g>
+  <path d="M470 352V324" stroke="#4FD38B" stroke-width="3" marker-end="url(#a)"/>
+  <path d="M492 324V352" stroke="#4FD38B" stroke-width="3" stroke-dasharray="4 5"/>
+  <text x="574" y="350" font-size="12" fill="#4FD38B">answers grounded in</text>
+  <text x="574" y="366" font-size="12" fill="#4FD38B">the caller's own data</text>
+
+  <!-- spoken reply -->
+  <g stroke="#FFC24D" stroke-width="4" stroke-linecap="round">
+    <path d="M826 246V274M840 232V288M854 220V300M868 238V282M882 212V308M896 230V290M910 244V276"/>
+  </g>
+  <text x="826" y="340" font-size="13" fill="#7FA190">spoken reply</text>
+
+  <rect x="40" y="460" width="880" height="44" rx="8" fill="#0D1D17" stroke="#2E5A47"/>
+  <text x="58" y="488" font-size="14" fill="#E3EAE5">Pipeline sketch · resolves internet-provider complaints <tspan fill="#FFC24D">without a cloud model</tspan></text>
+</svg>

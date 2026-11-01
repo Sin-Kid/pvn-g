@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+  <defs>
+    <pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#10231B" stroke-width="1"/></pattern>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#FFC24D"/></marker>
+  </defs>
+  <rect width="960" height="540" fill="#08130F"/>
+  <rect width="960" height="540" fill="url(#g)"/>
+  <text x="40" y="52" font-size="18" fill="#7FA190" letter-spacing="2">SMART BUS · REAL-TIME IOT FLEET + PASSENGERS</text>
+
+  <!-- on the bus -->
+  <rect x="40" y="96" width="250" height="330" rx="14" fill="#0D1D17" stroke="#2E5A47"/>
+  <text x="62" y="128" font-size="13" fill="#7FA190" letter-spacing="2">ON THE BUS</text>
+  <rect x="70" y="150" width="190" height="96" rx="8" fill="#151819" stroke="#2C3235"/>
+  <g fill="#D9B05A"><rect x="84" y="140" width="8" height="10"/><rect x="104" y="140" width="8" height="10"/><rect x="124" y="140" width="8" height="10"/><rect x="144" y="140" width="8" height="10"/><rect x="164" y="140" width="8" height="10"/><rect x="184" y="140" width="8" height="10"/><rect x="204" y="140" width="8" height="10"/><rect x="224" y="140" width="8" height="10"/>
+    <rect x="84" y="246" width="8" height="10"/><rect x="104" y="246" width="8" height="10"/><rect x="124" y="246" width="8" height="10"/><rect x="144" y="246" width="8" height="10"/><rect x="164" y="246" width="8" height="10"/><rect x="184" y="246" width="8" height="10"/><rect x="204" y="246" width="8" height="10"/><rect x="224" y="246" width="8" height="10"/></g>
+  <text x="165" y="196" font-size="24" fill="#E3EAE5" text-anchor="middle">ESP32</text>
+  <text x="165" y="222" font-size="12" fill="#7FA190" text-anchor="middle">telemetry node</text>
+  <rect x="70" y="290" width="88" height="56" rx="8" fill="#0A1712" stroke="#2E5A47"/>
+  <text x="114" y="324" font-size="15" fill="#E3EAE5" text-anchor="middle">GPS</text>
+  <rect x="172" y="290" width="88" height="56" rx="8" fill="#0A1712" stroke="#2E5A47"/>
+  <text x="216" y="324" font-size="15" fill="#E3EAE5" text-anchor="middle">RFID</text>
+  <path d="M114 290V262M216 290V262" stroke="#2E5A47" stroke-width="2"/>
+  <text x="70" y="390" font-size="12" fill="#7FA190">position + tap-in / tap-out</text>
+
+  <!-- uplink -->
+  <path d="M292 260H372" stroke="#FFC24D" stroke-width="3" fill="none" marker-end="url(#a)"/>
+  <text x="298" y="246" font-size="13" fill="#FFC24D">every 2 s</text>
+  <g fill="#FFC24D"><circle cx="312" cy="260" r="4"/><circle cx="336" cy="260" r="4" opacity=".6"/><circle cx="356" cy="260" r="4" opacity=".3"/></g>
+
+  <!-- backend -->
+  <rect x="380" y="150" width="240" height="220" rx="14" fill="#0D1D17" stroke="#4FD38B"/>
+  <text x="400" y="182" font-size="13" fill="#7FA190" letter-spacing="2">SUPABASE</text>
+  <text x="400" y="214" font-size="20" fill="#E3EAE5">PostgreSQL</text>
+  <text x="400" y="246" font-size="13" fill="#7FA190">realtime subscriptions</text>
+  <rect x="400" y="268" width="200" height="34" rx="6" fill="#0A1712" stroke="#2E5A47"/>
+  <text x="414" y="290" font-size="13" fill="#4FD38B">duplicate-tap guard</text>
+  <rect x="400" y="312" width="200" height="34" rx="6" fill="#0A1712" stroke="#2E5A47"/>
+  <text x="414" y="334" font-size="13" fill="#4FD38B">live digital twin</text>
+
+  <!-- clients -->
+  <path d="M622 220H700V160H742" stroke="#FFC24D" stroke-width="3" fill="none" marker-end="url(#a)"/>
+  <path d="M622 300H700V362H742" stroke="#FFC24D" stroke-width="3" fill="none" marker-end="url(#a)"/>
+  <rect x="750" y="106" width="170" height="110" rx="10" fill="#0D1D17" stroke="#2E5A47"/>
+  <text x="768" y="136" font-size="13" fill="#7FA190" letter-spacing="1">FLEET ADMIN</text>
+  <text x="768" y="164" font-size="17" fill="#E3EAE5">React</text>
+  <text x="768" y="192" font-size="12" fill="#7FA190">live map · occupancy</text>
+  <rect x="750" y="306" width="170" height="110" rx="10" fill="#0D1D17" stroke="#2E5A47"/>
+  <text x="768" y="336" font-size="13" fill="#7FA190" letter-spacing="1">PASSENGERS</text>
+  <text x="768" y="364" font-size="17" fill="#E3EAE5">React Native</text>
+  <text x="768" y="392" font-size="12" fill="#7FA190">bus location · seats</text>
+
+  <rect x="40" y="460" width="880" height="44" rx="8" fill="#0D1D17" stroke="#2E5A47"/>
+  <text x="58" y="488" font-size="14" fill="#E3EAE5">Architecture sketch · device behavior validated with <tspan fill="#FFC24D">emulated ESP32 units</tspan></text>
+</svg>

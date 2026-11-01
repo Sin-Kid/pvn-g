@@ -13,14 +13,27 @@ P.PROJECTS.forEach(function(p){
   head.innerHTML = '<span class="ic-des">' + p.des + '</span><span class="ic-name">' + p.name + '</span>' +
     '<span class="ic-tag">' + p.tag + '</span><span class="ic-chev" aria-hidden="true">+</span>';
   var sum = H('p', { class: 'ic-sum' }, p.sum);
+  var links = null;
+  if (p.links && p.links.length) {
+    links = H('div', { class: 'ic-links' }, p.links.map(function(l){
+      return '<a class="ic-link" href="' + l[1] + '" target="_blank" rel="noopener">' + l[0] + ' <span aria-hidden="true">\u2197</span></a>';
+    }).join(''));
+  }
   var body = H('div', { class: 'ic-body', id: 'icb-' + p.id });
   body.hidden = true;
-  body.innerHTML = p.body.map(function(t){ return '<p>' + t + '</p>'; }).join('') +
+  var pv = p.preview, img = '';
+  if (pv) {
+    var tag = '<img src="' + pv.src + '" alt="' + pv.alt + '" width="1280" height="720" loading="lazy" decoding="async">';
+    img = '<figure class="ic-prev">' + (pv.href ? '<a href="' + pv.href + '" target="_blank" rel="noopener">' + tag + '</a>' : tag) +
+      '<figcaption><b>' + pv.kind + '</b> \u00b7 ' + p.name +
+      (pv.href ? ' \u00b7 opens ' + pv.href.replace(/^https?:\/\//, '').replace(/\/$/, '') : '') + '</figcaption></figure>';
+  }
+  body.innerHTML = img + p.body.map(function(t){ return '<p>' + t + '</p>'; }).join('') +
     '<dl class="ic-meas">' + p.meas.map(function(m){
       return '<div><dt>' + m[0] + '</dt><dd>' + m[1] + (m[2] ? '<small>' + m[2] + '</small>' : '') + '</dd></div>';
     }).join('') + '</dl>' +
-    '<div class="ic-links"><span>Drives ' + p.nets.length + ' nets</span><a href="' + p.link + '" target="_blank" rel="noopener">Source on GitHub ↗</a></div>';
-  a.appendChild(head); a.appendChild(sum); a.appendChild(body);
+    '<p class="ic-drives">Drives ' + p.nets.length + ' nets on the schematic</p>';
+  a.appendChild(head); a.appendChild(sum); if (links) a.appendChild(links); a.appendChild(body);
   chipsEl.appendChild(a);
   chipNodes[p.id] = { el: a, head: head, body: body };
   head.addEventListener('click', function(){
@@ -39,7 +52,7 @@ P.GROUPS.forEach(function(g){
     var n = P.NETS[id], u = P.usersOf(id).length;
     var li = H('li'), b = H('button', { class: 'net', type: 'button', 'aria-pressed': 'false' });
     b.innerHTML = '<span class="net-pad" aria-hidden="true"></span><span class="net-name">' + n.name + '</span>' +
-      '<span class="net-load" title="' + (u ? 'Used by ' + u + ' project' + (u > 1 ? 's' : '') : 'No connection to a featured project') + '">' + (u ? '×' + u : 'NC') + '</span>';
+      '<span class="net-load" title="' + (u ? 'Used by ' + u + ' project' + (u > 1 ? 's' : '') : 'Listed skill, not tied to a featured project') + '">' + (u ? '×' + u : '–') + '</span>';
     li.appendChild(b); ul.appendChild(li); netNodes[id] = b;
     b.addEventListener('click', function(){
       var f = P.focus;
@@ -71,7 +84,7 @@ function report(f){
   var n = P.NETS[f.id], u = P.usersOf(f.id);
   bar.innerHTML = 'NET <b>' + n.name.toUpperCase() + '</b> ' +
     (u.length ? u.length + ' load' + (u.length > 1 ? 's' : '') + ' <span>' + u.map(function(p){ return p.des + ' ' + p.name; }).join(' · ') + '</span>'
-              : 'NC <span>Not wired to a featured project.</span>') +
+              : '<span>Listed skill, not tied to a featured project.</span>') +
     (n.also ? ' <span>' + n.also + '</span>' : '');
 }
 
@@ -182,5 +195,5 @@ window.addEventListener('resize', function(){ queue(false); });
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ queue(false); });
 if ('IntersectionObserver' in window) new IntersectionObserver(function(es){ visible = es[0].isIntersecting; }).observe(schem);
 
-P.setFocus({ type: 'project', id: 'firefit' }, 'init');
+P.setFocus({ type: 'project', id: P.PROJECTS[0].id }, 'init');
 })();

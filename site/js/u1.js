@@ -4,11 +4,13 @@
 var P = window.PVN, svg = document.getElementById('u1'), cap = document.getElementById('u1Probe');
 if (!P || !svg) return;
 var S = P.s, C = 280, K = 2.2, POS = [210, 238, 266, 294, 322, 350];
+/* package order: left side top to bottom, bottom side left to right,
+   right side bottom to top, top side right to left */
 var PINS = [
-  ['L','c'],['L','cpp'],['L','python'],['L','js'],['L','ts'],['L','sql'],
-  ['B','esp32'],['B','gps'],['B','rfid'],['B','ws'],['B','rest'],['B','postgres'],
-  ['R','tailwind'],['R','fastapi'],['R','node'],['R','rn'],['R','next'],['R','react'],
-  ['T','fastpitch'],['T','whisper'],['T','mediapipe'],['T','rag'],['T','bedrock'],['T','llm']
+  ['L','sv'],['L','verilog'],['L','uvm'],['L','sva'],['L','crv'],['L','cov'],
+  ['B','fpga'],['B','stm32'],['B','esp32'],['B','arduino'],['B','rpi'],['B','rtos'],
+  ['R','ts'],['R','js'],['R','matlab'],['R','python'],['R','emc'],['R','c'],
+  ['T','pd'],['T','dft'],['T','asic'],['T','sta'],['T','cdc'],['T','amba']
 ];
 var DEFAULT = 'U1 · PVN-G · 24 pins. Hover or tap a pin to probe its net.';
 var pins = [], hover = -1, kbd = 0, visible = true;
@@ -51,7 +53,7 @@ S('text', { class: 'm-silk', x: 152, y: 152, 'text-anchor': 'end' }, svg).textCo
 S('rect', { class: 'm-body', x: 160, y: 160, width: 240, height: 240, rx: 10 }, svg);
 S('circle', { class: 'm-dot', cx: 195, cy: 195, r: 6 }, svg);
 var mk = S('text', { class: 'm-mark', x: 280, y: 288, 'text-anchor': 'middle' }, svg); mk.textContent = 'PVN-G';
-S('text', { class: 'm-sub', x: 280, y: 310, 'text-anchor': 'middle' }, svg).textContent = 'FULL-STACK · EMBEDDED';
+S('text', { class: 'm-sub', x: 280, y: 310, 'text-anchor': 'middle' }, svg).textContent = 'RTL · FPGA · WEB';
 S('text', { class: 'm-sub', x: 280, y: 328, 'text-anchor': 'middle' }, svg).textContent = 'RVCE 2327 BLR';
 
 var gPulse = S('g', null, svg), gHit = S('g', null, svg);
@@ -84,7 +86,7 @@ PINS.forEach(function(pin, i){
 function pad2(n){ return (n < 10 ? '0' : '') + n; }
 function loads(net){
   var u = P.usersOf(net);
-  return u.length ? 'drives ' + u.map(function(p){ return p.name; }).join(', ') : 'NC on the schematic';
+  return u.length ? 'drives ' + u.map(function(p){ return p.name; }).join(', ') : 'listed skill';
 }
 function say(i){
   if (!cap) return;

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+  <defs>
+    <pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#10231B" stroke-width="1"/></pattern>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#FFC24D"/></marker>
+    <marker id="d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#7FA190"/></marker>
+  </defs>
+  <rect width="960" height="540" fill="#08130F"/>
+  <rect width="960" height="540" fill="url(#g)"/>
+  <text x="40" y="52" font-size="18" fill="#7FA190" letter-spacing="2">SMART PARKING · BASYS-3 (ARTIX-7) · SYSTEMVERILOG RTL</text>
+
+  <!-- seven-segment readout: F005 = five free slots -->
+  <rect x="40" y="90" width="410" height="190" rx="12" fill="#140C0C" stroke="#3A2020"/>
+  <g transform="translate(78 122) skewX(-6)" fill="#FF4B3E">
+    <g><rect x="10" y="0" width="36" height="10" rx="3"/><rect x="0" y="10" width="10" height="35" rx="3"/><rect x="10" y="45" width="36" height="10" rx="3"/><rect x="0" y="55" width="10" height="35" rx="3"/>
+      <g fill="#2A1616"><rect x="46" y="10" width="10" height="35" rx="3"/><rect x="46" y="55" width="10" height="35" rx="3"/><rect x="10" y="90" width="36" height="10" rx="3"/></g></g>
+    <g transform="translate(92 0)"><rect x="10" y="0" width="36" height="10" rx="3"/><rect x="46" y="10" width="10" height="35" rx="3"/><rect x="46" y="55" width="10" height="35" rx="3"/><rect x="10" y="90" width="36" height="10" rx="3"/><rect x="0" y="55" width="10" height="35" rx="3"/><rect x="0" y="10" width="10" height="35" rx="3"/><rect x="10" y="45" width="36" height="10" rx="3" fill="#2A1616"/></g>
+    <g transform="translate(184 0)"><rect x="10" y="0" width="36" height="10" rx="3"/><rect x="46" y="10" width="10" height="35" rx="3"/><rect x="46" y="55" width="10" height="35" rx="3"/><rect x="10" y="90" width="36" height="10" rx="3"/><rect x="0" y="55" width="10" height="35" rx="3"/><rect x="0" y="10" width="10" height="35" rx="3"/><rect x="10" y="45" width="36" height="10" rx="3" fill="#2A1616"/></g>
+    <g transform="translate(276 0)"><rect x="10" y="0" width="36" height="10" rx="3"/><rect x="0" y="10" width="10" height="35" rx="3"/><rect x="10" y="45" width="36" height="10" rx="3"/><rect x="46" y="55" width="10" height="35" rx="3"/><rect x="10" y="90" width="36" height="10" rx="3"/>
+      <g fill="#2A1616"><rect x="46" y="10" width="10" height="35" rx="3"/><rect x="0" y="55" width="10" height="35" rx="3"/></g></g>
+  </g>
+  <text x="62" y="262" font-size="14" fill="#B98080" letter-spacing="2">7-SEG · FREE SLOTS</text>
+
+  <!-- occupancy LEDs: 3 of 8 taken -->
+  <g>
+    <circle cx="70" cy="330" r="11" fill="#4FD38B"/><circle cx="116" cy="330" r="11" fill="#4FD38B"/><circle cx="162" cy="330" r="11" fill="#13261C" stroke="#245A3E"/>
+    <circle cx="208" cy="330" r="11" fill="#4FD38B"/><circle cx="254" cy="330" r="11" fill="#13261C" stroke="#245A3E"/><circle cx="300" cy="330" r="11" fill="#13261C" stroke="#245A3E"/>
+    <circle cx="346" cy="330" r="11" fill="#13261C" stroke="#245A3E"/><circle cx="392" cy="330" r="11" fill="#13261C" stroke="#245A3E"/>
+    <g fill="#4FD38B" opacity=".25"><circle cx="70" cy="330" r="20"/><circle cx="116" cy="330" r="20"/><circle cx="208" cy="330" r="20"/></g>
+  </g>
+  <text x="58" y="372" font-size="14" fill="#7FA190" letter-spacing="2">LED0–LED7 · OCCUPANCY</text>
+  <rect x="58" y="404" width="168" height="44" rx="8" fill="#1E0D0D" stroke="#FF5C61"/>
+  <text x="76" y="432" font-size="15" fill="#FF8A80" letter-spacing="1">EMERGENCY</text>
+  <rect x="190" y="416" width="26" height="20" rx="4" fill="#FF5C61"/>
+  <text x="246" y="432" font-size="13" fill="#7FA190">priority override</text>
+
+  <!-- block diagram -->
+  <g font-size="15">
+    <rect x="520" y="92" width="380" height="58" rx="8" fill="#0D1D17" stroke="#2E5A47"/>
+    <text x="540" y="118" fill="#E3EAE5">INPUTS</text><text x="540" y="138" font-size="13" fill="#7FA190">entry · exit · emergency</text>
+    <rect x="520" y="192" width="380" height="58" rx="8" fill="#0D1D17" stroke="#2E5A47"/>
+    <text x="540" y="218" fill="#E3EAE5">SLOT ALLOCATION</text><text x="540" y="238" font-size="13" fill="#7FA190">automatic assignment · occupancy tracking</text>
+    <rect x="520" y="292" width="380" height="58" rx="8" fill="#1A1210" stroke="#FF5C61"/>
+    <text x="540" y="318" fill="#E3EAE5">PRIORITY FSM</text><text x="540" y="338" font-size="13" fill="#FF8A80">emergency pre-empts normal flow</text>
+    <rect x="520" y="392" width="380" height="58" rx="8" fill="#0D1D17" stroke="#2E5A47"/>
+    <text x="540" y="418" fill="#E3EAE5">OUTPUTS</text><text x="540" y="438" font-size="13" fill="#7FA190">seven-segment display · LEDs</text>
+  </g>
+  <g stroke="#FFC24D" stroke-width="2.5" fill="none" marker-end="url(#a)">
+    <path d="M710 150V188"/><path d="M710 250V288"/><path d="M710 350V388"/>
+  </g>
+  <path d="M518 421H470V330H426" stroke="#FFC24D" stroke-width="2" stroke-dasharray="6 6" fill="none" marker-end="url(#a)"/>
+
+  <rect x="40" y="476" width="860" height="40" rx="8" fill="#0D1D17" stroke="#2E5A47"/>
+  <text x="58" y="502" font-size="14" fill="#E3EAE5">SVA + coverage-driven testbench · <tspan fill="#FFC24D">100% functional coverage</tspan> in Vivado XSIM</text>
+</svg>

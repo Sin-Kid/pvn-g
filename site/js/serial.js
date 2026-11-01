@@ -35,20 +35,21 @@ var C = {
     ['  skills            every net, by connector'],
     ['  net <name>        probe a net, e.g. net esp32'],
     ['  timeline          roles and schools, newest first'],
+    ['  certs             certificates, with links'],
     ['  contact           ways to reach Pavan'],
     ['  mask <color>      green, black, blue or white'],
     ['  signals on|off    start or stop the animated signals'],
     ['  goto <section>    about, projects, timeline, contact'],
     ['  uptime  date  ping  history  clear', 'dim']
   ]; },
-  whoami: function(){ return [['pavan-g · final-year ECE at RV College of Engineering, Bengaluru', 'ok'], ['freelance technical support engineer at Thinkads.co', 'ok']]; },
+  whoami: function(){ return [['pavan-g · final-year ECE at RV College of Engineering, Bengaluru', 'ok'], ['RTL design and verification, FPGAs, embedded systems', 'ok'], ['freelance technical support engineer at Thinkads.co', 'ok']]; },
   about: function(){ return [
-    ['Builds systems end to end: ESP32 telemetry, local and cloud LLM pipelines,'],
-    ['and the web and TV apps on top. Usually solo, always benchmarked.'],
+    ['Designs and verifies digital hardware in SystemVerilog, brings it up on'],
+    ['FPGAs and microcontrollers, and builds the software around it.'],
     ['Off the clock: photography, robotics, markets, badminton, fitness.', 'dim']
   ]; },
   projects: function(){
-    var r = [['4 chips on /schematic', 'hi']];
+    var r = [[P.PROJECTS.length + ' chips on /schematic, hardware first', 'hi']];
     P.PROJECTS.forEach(function(p){ r.push([p.des + '  ' + pad(p.name, 13) + p.sum]); });
     r.push(['open one with: open <name>', 'dim']);
     return r;
@@ -59,7 +60,10 @@ var C = {
     if (!id) return [['no chip matches "' + arg + '". try: ' + P.PROJECTS.map(function(p){ return p.id; }).join(', '), 'err']];
     var p = P.project(id);
     P.setFocus({ type: 'project', id: id }, 'serial');
-    return [[p.des + ' ' + p.name + ' energized', 'ok'], [p.sum], ['nets: ' + p.nets.map(function(n){ return P.NETS[n].name; }).join(', '), 'dim'], ['see it with: goto projects', 'dim']];
+    var r = [[p.des + ' ' + p.name + ' energized', 'ok'], [p.sum], ['nets: ' + p.nets.map(function(n){ return P.NETS[n].name; }).join(', '), 'dim']];
+    (p.links || []).forEach(function(l){ r.push([pad(l[0].toLowerCase(), 20) + a(l[1], l[1].replace(/^https?:\/\//, '')), '', true]); });
+    r.push(['see it with: goto projects', 'dim']);
+    return r;
   },
   skills: function(){
     var r = [];
@@ -76,7 +80,7 @@ var C = {
     if (!id) return [['no net called "' + arg + '". type skills for the list.', 'err']];
     var n = P.NETS[id], u = P.usersOf(id);
     P.setFocus({ type: 'net', id: id }, 'serial');
-    var r = [['NET ' + n.name + ': ' + (u.length ? u.length + ' load' + (u.length > 1 ? 's' : '') + ' → ' + u.map(function(p){ return p.des + ' ' + p.name; }).join(', ') : 'NC, no featured project'), 'ok']];
+    var r = [['NET ' + n.name + ': ' + (u.length ? u.length + ' load' + (u.length > 1 ? 's' : '') + ' → ' + u.map(function(p){ return p.des + ' ' + p.name; }).join(', ') : 'listed skill, not tied to a featured project'), 'ok']];
     if (n.also) r.push([n.also, 'dim']);
     return r;
   },
@@ -91,6 +95,7 @@ var C = {
     ['mail      ' + MAIL, 'hi'],
     ['code      ' + a(GH, 'github.com/Sin-Kid'), '', true],
     ['work      ' + a(LI, 'linkedin.com/in/pavan-g-062a59292'), '', true],
+    ['dsa       ' + a(P.LINKS.leetcode, 'leetcode.com/u/0ZYfHENg4s'), '', true],
     ['base      Bengaluru, India · UTC+5:30', 'dim']
   ]; },
   mask: function(arg){
@@ -135,9 +140,15 @@ var C = {
   exit: function(){ return [['there is no exit. only more projects.']]; },
   resume: function(){ return [['for the latest resume, write to ' + MAIL, 'hi']]; },
   github: function(){ return [[a(GH, 'github.com/Sin-Kid'), '', true]]; },
+  leetcode: function(){ return [[a(P.LINKS.leetcode, 'leetcode.com/u/0ZYfHENg4s'), '', true]]; },
+  certs: function(){
+    return [['certificates', 'hi']].concat(P.CERTS.map(function(c){
+      return [pad(c.name, 30) + pad(c.by, 24) + a(c.url, 'view \u2197'), '', true];
+    }));
+  },
   linkedin: function(){ return [[a(LI, 'linkedin.com/in/pavan-g-062a59292'), '', true]]; }
 };
-var ALIAS = { ls: 'projects', project: 'open', chip: 'open', probe: 'net', skill: 'net', nets: 'skills', exp: 'timeline',
+var ALIAS = { ls: 'projects', certificates: 'certs', cert: 'certs', lc: 'leetcode', project: 'open', chip: 'open', probe: 'net', skill: 'net', nets: 'skills', exp: 'timeline',
   experience: 'timeline', mail: 'contact', email: 'contact', power: 'signals', sig: 'signals', cd: 'goto', hi: 'hello',
   cls: 'clear', cv: 'resume', '?': 'help', man: 'help', time: 'date', cat: 'about' };
 function run(raw){

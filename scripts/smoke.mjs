@@ -29,11 +29,26 @@ async function open(path, viewport) {
 
 {
   const { page, errors } = await open('/', { width: 1280, height: 860 });
-  check((await page.locator('.ic').count()) === 4, 'renders 4 project chips');
-  check((await page.locator('.net').count()) === 34, 'renders 34 skill nets');
+  check((await page.locator('.ic').count()) === 5, 'renders 5 project chips');
+  check((await page.locator('.net').count()) === 53, 'renders 53 skill nets');
   check((await page.locator('#u1 .m-pin').count()) === 24, 'U1 has 24 pins');
   check((await page.locator('#wires path.w').count()) > 0, 'wires the focused chip to its nets');
   check((await page.locator('#laPlot svg').count()) === 1, 'draws the logic analyzer');
+  check((await page.locator('.ic').first().getAttribute('id')) === 'ic-parking', 'the FPGA project comes first');
+
+  const links = await page.$$eval('.ic-link', (as) => as.map((a) => a.href));
+  check(links.length === 7 && links.every((h) => h.startsWith('https://')), `every project link is a real https link (${links.length} found)`);
+  const certs = await page.$$eval('a.cert', (as) => as.map((a) => a.href));
+  check(certs.length === 3 && certs.every((h) => h.startsWith('https://drive.google.com/')), 'all 3 certificates link to their files');
+
+  // previews are lazy-loaded, so bring each one into view before checking it
+  const loaded = (sel) => page.$eval(sel, (img) => img.complete && img.naturalWidth > 0).catch(() => false);
+  await page.locator('#ic-parking .ic-prev img').scrollIntoViewIfNeeded();
+  await page.waitForTimeout(500);
+  check(await loaded('#ic-parking .ic-prev img'), 'the open chip shows its preview');
+  await page.click('#ic-firefit .ic-head');
+  await page.waitForTimeout(800);
+  check(await loaded('#ic-firefit .ic-prev img'), 'opening another chip loads its screenshot');
 
   await page.fill('#termIn', 'net esp32');
   await page.press('#termIn', 'Enter');
