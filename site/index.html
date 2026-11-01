@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pavan G · Full-stack, AI and embedded engineer</title>
+<meta name="description" content="Pavan G is a final-year ECE student at RV College of Engineering, Bengaluru, building full-stack apps, local and cloud LLM pipelines and ESP32 systems.">
+<meta name="author" content="Pavan G">
+<meta name="theme-color" content="#0A2A1E">
+<link rel="canonical" href="https://pvn-g.netlify.app/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pavan G">
+<meta property="og:title" content="Pavan G · Full-stack, AI and embedded engineer">
+<meta property="og:description" content="An interactive circuit-board portfolio: projects wired to the skills they use, a logic-analyzer timeline and a working serial monitor.">
+<meta property="og:url" content="https://pvn-g.netlify.app/">
+<meta property="og:image" content="https://pvn-g.netlify.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="/fonts/big-shoulders-display-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/fonts.css">
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/components.css">
+<script src="/js/boot.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Pavan G",
+  "url": "https://pvn-g.netlify.app/",
+  "email": "mailto:pavang1052005@gmail.com",
+  "address": { "@type": "PostalAddress", "addressLocality": "Bengaluru", "addressCountry": "IN" },
+  "affiliation": { "@type": "CollegeOrUniversity", "name": "R. V. College of Engineering" },
+  "knowsAbout": ["Full-stack web development", "Embedded systems", "IoT", "Large language models", "React Native"],
+  "sameAs": ["https://github.com/Sin-Kid", "https://www.linkedin.com/in/pavan-g-062a59292"]
+}
+</script>
+</head>
+<body>
+<canvas id="field" aria-hidden="true"></canvas>
+<div class="vignette" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Pavan G, back to top">
+      <span class="leds" aria-hidden="true"><span class="led pwr"></span><span class="led act"></span></span>
+      <span>PVN-G</span><span class="brand-rev">REV 2026.11</span>
+    </a>
+    <nav class="tps" aria-label="Sections">
+      <a href="#about"><i>TP1</i>About</a>
+      <a href="#projects"><i>TP2</i>Projects</a>
+      <a href="#timeline"><i>TP3</i>Timeline</a>
+      <a href="#serial"><i>TP4</i>Serial</a>
+      <a href="#contact"><i>TP5</i>Contact</a>
+    </nav>
+    <div class="controls">
+      <div class="mask" role="radiogroup" aria-label="Solder mask color">
+        <button type="button" role="radio" data-mask="green" aria-checked="false" aria-label="Green solder mask" title="Green mask"></button>
+        <button type="button" role="radio" data-mask="black" aria-checked="false" aria-label="Black solder mask" title="Black mask"></button>
+        <button type="button" role="radio" data-mask="blue" aria-checked="false" aria-label="Blue solder mask" title="Blue mask"></button>
+        <button type="button" role="radio" data-mask="white" aria-checked="false" aria-label="White solder mask" title="White mask"></button>
+      </div>
+      <button type="button" class="sw" id="sigSwitch" role="switch" aria-checked="true" aria-label="Animated signals" title="Animated signals">
+        <span class="sw-track" aria-hidden="true"><span class="sw-knob"></span></span><span class="sw-lbl" aria-hidden="true">SIG</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="page">
+  <div class="wrap">
+
+    <section class="hero" id="top" aria-label="Introduction">
+      <div class="hero-text">
+        <p class="status">Open to roles · graduating Aug 2027</p>
+        <h1 class="name">Pavan <span class="g">G</span></h1>
+        <p class="silk-line"><span>U1 · PVN-G</span><span>ECE · RVCE</span><span>Bengaluru</span></p>
+        <p class="lede">I build systems end to end, from ESP32 telemetry and sensor pipelines to local LLMs and the web and TV apps people actually use.</p>
+        <div class="cta">
+          <a class="key key-primary" href="#projects">Probe the projects</a>
+          <a class="key" href="#serial">Open serial monitor</a>
+        </div>
+        <dl class="readouts">
+          <div><dt>Rep accuracy</dt><dd>92<small>%</small></dd></div>
+          <div><dt>Client apps</dt><dd>5+</dd></div>
+          <div><dt>Voice languages</dt><dd>4</dd></div>
+          <div><dt>Telemetry</dt><dd>2<small>s</small></dd></div>
+        </dl>
+      </div>
+      <figure class="module">
+        <svg id="u1" viewBox="0 0 560 560" role="img" aria-label="U1, a 24-pin chip labelled PVN-G whose pins are Pavan's core skills"></svg>
+        <figcaption class="probe" id="u1Probe" aria-live="polite">U1 · PVN-G · 24 pins. Hover or tap a pin to probe its net.</figcaption>
+      </figure>
+    </section>
+
+    <section class="sec" id="about">
+      <header class="sec-head">
+        <span class="tp">TP1 · Designer's notes</span>
+        <h2>About</h2>
+      </header>
+      <div class="about">
+        <div class="about-copy">
+          <p>I'm a final-year Electronics and Communication student at R. V. College of Engineering in Bengaluru. Since December 2025 I've been a technical support engineer at Thinkads.co, first as an intern and now as a freelancer, building and supporting full-stack apps for clients.</p>
+          <p>The projects I enjoy most cross the line between hardware and software. A phone that turns into a TV's camera. An ESP32 that keeps a live digital twin of a bus. A voice assistant that answers in Kannada from a model running locally. I usually build them solo, end to end, and then benchmark whether they work.</p>
+        </div>
+        <aside class="spec panel" aria-label="Quick facts">
+          <div class="spec-h hatch"><span>Operating conditions</span><span>Typ.</span></div>
+          <dl>
+            <div><dt>Base</dt><dd>Bengaluru, India (IST)</dd></div>
+            <div><dt>Degree</dt><dd>B.E. Electronics &amp; Communication, RVCE, 2023–2027</dd></div>
+            <div><dt>Now</dt><dd>Freelance technical support engineer, Thinkads.co</dd></div>
+            <div><dt>Looking for</dt><dd>Internships and graduate roles in full-stack, AI or embedded</dd></div>
+            <div><dt>Peripherals</dt><dd>Photography, robotics, financial markets, badminton, fitness, hackathons</dd></div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <section class="sec" id="projects">
+      <header class="sec-head">
+        <span class="tp">TP2 · Schematic</span>
+        <h2>Projects</h2>
+        <p class="sec-note">Each project is a chip wired to the skills it uses. Open a chip to energize its nets, or pick a net from the connectors to see every chip that depends on it.</p>
+      </header>
+      <p class="probebar" id="probebar" aria-live="polite">Probe idle.</p>
+      <div class="schem" id="schem">
+        <svg class="wires" id="wires" aria-hidden="true"></svg>
+        <div class="chips" id="chips"></div>
+        <div class="nets" id="nets" role="group" aria-label="Skill nets"></div>
+      </div>
+    </section>
+
+    <section class="sec" id="timeline">
+      <header class="sec-head">
+        <span class="tp">TP3 · Logic analyzer</span>
+        <h2>Timeline</h2>
+        <p class="sec-note">Every role and school as a digital channel, high while active. Drag the cursor to read what was running at any point.</p>
+      </header>
+      <div class="la panel">
+        <div class="la-bar"><span>5 channels · 1 sample per month · 2021 – 2027</span><output class="la-read" id="laRead"></output></div>
+        <div class="la-grid">
+          <ul class="la-labels" id="laLabels"></ul>
+          <div class="la-plot" id="laPlot" tabindex="0" role="slider" aria-label="Timeline cursor" aria-valuemin="0" aria-valuemax="83" aria-valuenow="70"></div>
+        </div>
+        <p class="la-hint">Drag across the traces, or focus the plot and use the arrow keys. Dashed sections are scheduled, not yet run.</p>
+      </div>
+      <div class="roles" id="roles">
+        <article class="role panel" data-ch="thinkads" style="--c:var(--c1)">
+          <div class="role-top"><span class="role-ch">D1</span><span>Dec 2025 – present</span></div>
+          <h3>Thinkads.co</h3>
+          <p class="sub">Technical support engineer · intern, then freelancer</p>
+          <ul>
+            <li>Built and delivered 5+ full-stack web apps with HTML, CSS, JavaScript, PHP, SQL and the MERN stack.</li>
+            <li>Integrates REST APIs and third-party services, and debugs database-backed features across deployed client projects.</li>
+          </ul>
+        </article>
+        <article class="role panel" data-ch="malgudi" style="--c:var(--c2)">
+          <div class="role-top"><span class="role-ch">D2</span><span>Jun – Aug 2024</span></div>
+          <h3>Malgudi Technolabs</h3>
+          <p class="sub">Engineering intern</p>
+          <ul>
+            <li>Configured and troubleshot networks with Apache, diagnostic tools, mesh networking and several protocols and topologies.</li>
+            <li>Built Raspberry Pi projects and AI-agent prototypes on Linux.</li>
+          </ul>
+        </article>
+        <article class="role panel" data-ch="rvce" style="--c:var(--c3)">
+          <div class="role-top"><span class="role-ch">D3</span><span>Sep 2023 – Aug 2027</span></div>
+          <h3>RV College of Engineering</h3>
+          <p class="sub">B.E. Electronics &amp; Communication · CGPA 7.43 / 10</p>
+          <p>Coursework in digital design, VLSI, semiconductor devices, analog and digital electronics, computer architecture, data structures and algorithms, and operating systems.</p>
+        </article>
+        <article class="role panel" data-ch="puc sslc" style="--c:var(--c4)">
+          <div class="role-top"><span class="role-ch">D4 · D5</span><span>2011 – 2023</span></div>
+          <h3>School</h3>
+          <p class="sub">Karnataka</p>
+          <ul>
+            <li>Pre-University (Class XII), PCMC stream: 91.5%, 2021–2023</li>
+            <li>SSLC (Class X), State Board: 95.04%, 2011–2021</li>
+          </ul>
+        </article>
+        <article class="role panel wide">
+          <div class="role-top"><span class="role-ch">CAL</span><span>Certificates</span></div>
+          <h3>Calibration records</h3>
+          <div class="certs">
+            <div class="cert"><b>Database Management Systems</b><span>IIT Kharagpur · NPTEL</span></div>
+            <div class="cert"><b>Data Science for Engineers</b><span>IIT Madras · NPTEL</span></div>
+            <div class="cert"><b>Programming in C</b><span>Infosys Springboard</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="sec" id="serial">
+      <header class="sec-head">
+        <span class="tp">TP4 · UART</span>
+        <h2>Serial monitor</h2>
+        <p class="sec-note">Talk to the board. Type <code>help</code> for commands; some of them drive the rest of this page.</p>
+      </header>
+      <div class="term panel">
+        <div class="term-bar">
+          <span class="port">/dev/tty.PVN-G</span><span>115200 baud</span><span>8N1</span>
+          <span class="rxtx" aria-hidden="true"><span><i id="tx"></i>TX</span><span><i id="rx"></i>RX</span></span>
+        </div>
+        <div class="term-out" id="termOut" role="log" aria-live="polite" aria-label="Serial output"><div class="ln dim">PVN-G bootloader rev 2026.11</div><div class="ln ok">[ ok ] crystal locked at 16 MHz</div><div class="ln ok">[ ok ] mounted 4 project chips on /schematic</div><div class="ln ok">[ ok ] routed 34 skill nets</div><div class="ln ok">[ ok ] uplink: Thinkads.co (freelance)</div><div class="ln">ready. type <span class="hi">help</span> and press Enter.</div></div>
+        <form class="term-in" id="termForm" autocomplete="off">
+          <label for="termIn">&gt;</label>
+          <input id="termIn" name="cmd" type="text" spellcheck="false" autocapitalize="off" placeholder="help" aria-label="Command">
+          <button type="submit">Send</button>
+        </form>
+        <div class="term-quick" id="termQuick" role="group" aria-label="Quick commands">
+          <button type="button" data-cmd="help">help</button>
+          <button type="button" data-cmd="projects">projects</button>
+          <button type="button" data-cmd="net python">net python</button>
+          <button type="button" data-cmd="mask black">mask black</button>
+          <button type="button" data-cmd="uptime">uptime</button>
+          <button type="button" data-cmd="sudo hire pavan">sudo hire pavan</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="contact">
+      <header class="sec-head">
+        <span class="tp">TP5 · J0 external interface</span>
+        <h2>Connect</h2>
+      </header>
+      <div class="contact panel">
+        <div>
+          <p>Graduating in 2027 and open to internships, graduate roles and freelance builds across full-stack, AI and embedded systems.</p>
+          <div class="mail">
+            <code id="email">pavang1052005@gmail.com</code>
+            <button type="button" class="key key-primary" id="copyMail">Copy address</button>
+          </div>
+          <div class="copied" id="copied" aria-live="polite"></div>
+        </div>
+        <ul class="ports">
+          <li><i aria-hidden="true"></i><span class="pn">Pin 1 · Mail</span><span class="v">pavang1052005@gmail.com</span></li>
+          <li><i aria-hidden="true"></i><span class="pn">Pin 2 · Code</span><a href="https://github.com/Sin-Kid" target="_blank" rel="noopener">github.com/Sin-Kid ↗</a></li>
+          <li><i aria-hidden="true"></i><span class="pn">Pin 3 · Work</span><a href="https://www.linkedin.com/in/pavan-g-062a59292" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+          <li><i aria-hidden="true"></i><span class="pn">Pin 4 · GND</span><span class="v">Bengaluru, India · UTC+5:30</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <span>PVN-G · 1.6 mm FR-4 · ENIG · <span id="maskName">green</span> solder mask · rev 2026.11</span>
+      <span>© 2026 Pavan G · designed and assembled in Bengaluru · <a href="https://github.com/Sin-Kid/pvn-g" rel="noopener">source</a></span>
+    </footer>
+  </div>
+</main>
+<script src="/js/core.js"></script>
+<script src="/js/field.js"></script>
+<script src="/js/u1.js"></script>
+<script src="/js/schematic.js"></script>
+<script src="/js/analyzer.js"></script>
+<script src="/js/serial.js"></script>
+<script src="/js/ui.js"></script>
+</body>
+</html>

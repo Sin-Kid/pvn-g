@@ -1,0 +1,87 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  # Netlify project "pvn-g". The ID is not a secret; the auth token is.
+  NETLIFY_SITE_ID: 98981a1b-4491-401f-8406-e6769c5e3226
+  NETLIFY_CLI_VERSION: 27.13.0
+
+jobs:
+  check:
+    name: Validate and smoke test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dev tools
+        run: npm ci
+
+      - name: Validate HTML, scripts, links and headers
+        run: npm run check
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Smoke test in a real browser
+        run: npm test
+
+  deploy:
+    name: Deploy to Netlify
+    needs: check
+    # Fork PRs never get the token, so only deploy pushes and same-repo PRs.
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: ${{ github.event_name == 'pull_request' && 'preview' || 'production' }}
+      url: ${{ steps.deploy.outputs.url }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+
+      - name: Deploy site/ (production on main, preview on pull requests)
+        id: deploy
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          EVENT: ${{ github.event_name }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          COMMIT_MSG: ${{ github.sha }}
+        run: |
+          if [ -z "$NETLIFY_AUTH_TOKEN" ]; then
+            echo "::warning title=Not deployed::Add a NETLIFY_AUTH_TOKEN repository secret to turn on automatic deploys."
+            echo "Checks passed, but nothing was deployed because NETLIFY_AUTH_TOKEN is not set." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          if [ "$EVENT" = "pull_request" ]; then
+            FLAGS="--alias=pr-$PR_NUMBER"
+            FIELD="deploy_url"
+          else
+            FLAGS="--prod"
+            FIELD="url"
+          fi
+          npx --yes "netlify-cli@$NETLIFY_CLI_VERSION" deploy --dir=site $FLAGS --message="$COMMIT_MSG" --json > deploy.json
+          URL=$(node -e "const d=require('./deploy.json'); console.log(d[process.argv[1]] || d.deploy_url)" "$FIELD")
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+          echo "Deployed to $URL" >> "$GITHUB_STEP_SUMMARY"

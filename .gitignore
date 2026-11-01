@@ -1,0 +1,6 @@
+node_modules/
+.netlify/
+test-results/
+deploy.json
+*.log
+.DS_Store

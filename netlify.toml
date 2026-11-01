@@ -1,0 +1,4 @@
+# Static site, nothing to build. GitHub Actions checks every push and then
+# deploys the site/ folder with the Netlify CLI (see .github/workflows/ci-cd.yml).
+[build]
+  publish = "site"

@@ -1,0 +1,13 @@
+/* Self-hosted fonts (SIL Open Font License 1.1, see /fonts/OFL-*.txt). Latin subset only. */
+@font-face{font-family:"Big Shoulders Display";font-style:normal;font-weight:600;font-display:swap;
+  src:url("/fonts/big-shoulders-display-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"Big Shoulders Display";font-style:normal;font-weight:800;font-display:swap;
+  src:url("/fonts/big-shoulders-display-latin-800-normal.woff2") format("woff2")}
+@font-face{font-family:"Instrument Sans";font-style:normal;font-weight:400;font-display:swap;
+  src:url("/fonts/instrument-sans-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Instrument Sans";font-style:normal;font-weight:500;font-display:swap;
+  src:url("/fonts/instrument-sans-latin-500-normal.woff2") format("woff2")}
+@font-face{font-family:"Instrument Sans";font-style:normal;font-weight:600;font-display:swap;
+  src:url("/fonts/instrument-sans-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"Share Tech Mono";font-style:normal;font-weight:400;font-display:swap;
+  src:url("/fonts/share-tech-mono-latin-400-normal.woff2") format("woff2")}
