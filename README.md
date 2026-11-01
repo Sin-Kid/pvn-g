@@ -15,7 +15,7 @@ An interactive portfolio built like a circuit board. I'm a final-year Electronic
 | --- | --- | --- |
 | U2 | **Smart Parking**: SystemVerilog RTL on a Basys-3 (Artix-7) FPGA with slot allocation and emergency priority, 100% functional coverage in Vivado XSIM | |
 | U3 | **Smart Bus**: ESP32 GPS/RFID telemetry into Supabase and PostgreSQL with React and React Native front ends | [code](https://github.com/Sin-Kid/smart-bus-app) · [demo video](https://drive.google.com/drive/folders/1-6QwSIBd1sO_FEfgYHaz-M9BqnWz_YpU) |
-| U4 | **TeleBot AI**: local voice assistant in four Indian languages with Whisper, Llama 3.2 and Indic TTS | [code](https://github.com/Sin-Kid/telecom-ai-bot) |
+| U4 | **TeleBot AI**: local voice assistant in four Indian languages with Whisper, Llama 3.2 and Indic TTS | [code](https://github.com/Sin-Kid/telecom-ai-bot) · [demo video](https://drive.google.com/drive/folders/1VFYcc_TsKdXkg7uUzuL7QTnoseDSk0Md?usp=sharing) |
 | U5 | **Fire-Fit**: AI personal trainer for Fire TV, built for the Amazon Developer Hackathon | [code](https://github.com/Sin-Kid/fire-fit-tv) · [demo video](https://youtu.be/du_oGdhgtNg) · [browser build](https://fire-fit-tv.netlify.app) |
 | U6 | **Portfolio OS**: macOS-style desktop in the browser with live trading apps | [live demo](https://panna-g.netlify.app) |
 

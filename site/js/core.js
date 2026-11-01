@@ -216,7 +216,7 @@ PVN.PROJECTS = [
     ],
     meas: [['Languages', '4', 'EN HI KN TE'], ['Model', 'Llama 3.2', 'local'], ['Grounding', 'live', 'SQLite']],
     nets: ['python', 'fastapi', 'llm', 'whisper', 'fastpitch', 'rag', 'sqlite', 'sql'],
-    links: [['Code', GH + 'telecom-ai-bot']],
+    links: [['Code', GH + 'telecom-ai-bot'], ['Demo video', 'https://drive.google.com/drive/folders/1VFYcc_TsKdXkg7uUzuL7QTnoseDSk0Md?usp=sharing']],
     preview: { src: '/img/telebot.svg', kind: 'Pipeline', alt: 'Pipeline sketch of TeleBot AI: caller speech goes through Whisper, then Llama 3.2 running locally with SQLite customer data, then FastPitch and HiFi-GAN speak the reply.' } },
   { id: 'firefit', des: 'U5', name: 'Fire-Fit', tag: 'Amazon hackathon',
     sum: 'An AI personal trainer for Fire TV. Your phone becomes the TV’s camera and microphone, and a pose model counts your reps.',

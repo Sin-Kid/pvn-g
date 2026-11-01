@@ -37,7 +37,7 @@ async function open(path, viewport) {
   check((await page.locator('.ic').first().getAttribute('id')) === 'ic-parking', 'the FPGA project comes first');
 
   const links = await page.$$eval('.ic-link', (as) => as.map((a) => a.href));
-  check(links.length === 7 && links.every((h) => h.startsWith('https://')), `every project link is a real https link (${links.length} found)`);
+  check(links.length === 8 && links.every((h) => h.startsWith('https://')), `every project link is a real https link (${links.length} found)`);
   const certs = await page.$$eval('a.cert', (as) => as.map((a) => a.href));
   check(certs.length === 3 && certs.every((h) => h.startsWith('https://drive.google.com/')), 'all 3 certificates link to their files');
 
