@@ -1,6 +1,6 @@
 # PVN-G · Pavan G's portfolio
 
-[![CI/CD](https://github.com/Sin-Kid/pvn-g/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/Sin-Kid/pvn-g/actions/workflows/ci-cd.yml)
+[![CI](https://github.com/Sin-Kid/pvn-g/actions/workflows/ci.yml/badge.svg)](https://github.com/Sin-Kid/pvn-g/actions/workflows/ci.yml)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/98981a1b-4491-401f-8406-e6769c5e3226/deploy-status)](https://app.netlify.com/projects/pvn-g/deploys)
 
 **Live:** https://pvn-g.netlify.app
@@ -36,7 +36,7 @@ scripts/
   smoke.mjs           opens the site in Chromium and exercises every interactive part
   serve.mjs           local server that applies the same headers as Netlify
 .github/workflows/
-  ci-cd.yml           checks, then deploys to Netlify
+  ci.yml              validation and browser smoke test
 ```
 
 ## Run it locally
@@ -48,13 +48,12 @@ npm run serve        # http://localhost:8080
 
 ## CI/CD
 
-Every push and pull request runs `.github/workflows/ci-cd.yml`:
+**CI, GitHub Actions** (`.github/workflows/ci.yml`) runs on every push and pull request:
 
 1. **Validate**: `html-validate` on both pages, a syntax check of every script, broken-reference and third-party checks, and a check that the security headers are still there.
 2. **Smoke test**: Playwright opens the site in Chromium with the production Content-Security-Policy and checks that the chips, nets, wires, logic analyzer, serial monitor and mask switch work, with no console errors and no sideways scrolling on a phone.
-3. **Deploy**: only if both pass. Pushes to `main` go to production at pvn-g.netlify.app. Pull requests get their own preview URL, shown in the run summary.
 
-Deploys need one repository secret, `NETLIFY_AUTH_TOKEN` (a Netlify personal access token). Without it the checks still run and the deploy step is skipped with a warning.
+**CD, Netlify** is linked to this repo. Every push to `main` builds and deploys to production at pvn-g.netlify.app, and every pull request gets its own deploy preview. The Netlify build runs `npm run check` first (see `netlify.toml`), so a page that fails validation never goes live.
 
 ## Credits
 
